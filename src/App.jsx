@@ -6,8 +6,8 @@ export default function AssemblyEndgame() {
   const [currentWord, setCurrentWord] = useState("react")
   const [guessedLetters, setGuessedLetters] = useState([])
 
-  console.log(guessedLetters)
-  
+  const wrongGuessCount = guessedLetters.filter(letter => !currentWord.includes(letter)).length
+
   const alphabet = "abcdefghijklmnopqrstuvwxyz"
 
   function addGuessedLetter(letter) {
@@ -33,7 +33,9 @@ export default function AssemblyEndgame() {
   })
   
   const letterElements = currentWord.split("").map((letter, index) => (
-    <span key={index}>{letter.toUpperCase()}</span>
+    <span key={index}>
+      {guessedLetters.includes(letter) ? letter.toUpperCase() : ""}
+    </span>
   ))
   
   const keyboardElements = alphabet.split("").map(letter => {
